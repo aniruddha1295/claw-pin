@@ -8,7 +8,7 @@
 const ora = require('ora');
 const path = require('path');
 const logger = require('../logger');
-const { pinFile } = require('../../integration/filecoin-pin');
+const { initAgent, getAgent } = require('../../integration/agent');
 
 /**
  * Handler for: claw-pin upload <file> [--escrow]
@@ -27,7 +27,9 @@ async function uploadCommand(file, options = {}) {
   const spinner = ora('Pinning file to Filecoin…').start();
 
   try {
-    const result = await pinFile(resolvedPath);
+    await initAgent();
+    const agent = getAgent();
+    const result = await agent.invoke('filePin.upload', resolvedPath);
 
     spinner.succeed('File pinned successfully!');
     logger.divider();

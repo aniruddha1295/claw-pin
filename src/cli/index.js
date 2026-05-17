@@ -15,6 +15,7 @@ const { uploadCommand } = require('./cmd/upload');
 const { statusCommand } = require('./cmd/status');
 const { retrieveCommand } = require('./cmd/retrieve');
 const logger = require('./logger');
+const { initAgent } = require('../integration/agent');
 
 const program = new Command();
 
@@ -49,7 +50,9 @@ program
   });
 
 // ─── Global error catch ───────────────────────────────────────────────────────
-program.parseAsync(process.argv).catch((err) => {
-  logger.error(`Fatal CLI error: ${err.message}`, err);
-  process.exit(1);
-});
+initAgent()
+  .then(() => program.parseAsync(process.argv))
+  .catch((err) => {
+    logger.error(`Fatal CLI error: ${err.message}`, err);
+    process.exit(1);
+  });

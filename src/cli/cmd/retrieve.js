@@ -6,7 +6,7 @@
 
 const ora = require('ora');
 const logger = require('../logger');
-const { retrieveFile } = require('../../integration/filecoin-pin');
+const { initAgent, getAgent } = require('../../integration/agent');
 
 /**
  * Handler for: claw-pin retrieve <cid> <outputPath>
@@ -31,7 +31,9 @@ async function retrieveCommand(cid, outputPath) {
   const spinner = ora('Downloading from Filecoin…').start();
 
   try {
-    const result = await retrieveFile(cid.trim(), outputPath.trim());
+    await initAgent();
+    const agent = getAgent();
+    const result = await agent.invoke('filePin.retrieve', cid.trim(), outputPath.trim());
 
     spinner.succeed('File retrieved successfully!');
     logger.divider();

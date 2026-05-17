@@ -6,7 +6,7 @@
 
 const ora = require('ora');
 const logger = require('../logger');
-const { getPinStatus } = require('../../integration/filecoin-pin');
+const { initAgent, getAgent } = require('../../integration/agent');
 
 /**
  * Handler for: claw-pin status <cid>
@@ -24,7 +24,9 @@ async function statusCommand(cid) {
   const spinner = ora('Fetching status from Filecoin…').start();
 
   try {
-    const result = await getPinStatus(cid.trim());
+    await initAgent();
+    const agent = getAgent();
+    const result = await agent.invoke('filePin.status', cid.trim());
 
     spinner.succeed('Status retrieved!');
     logger.divider();
