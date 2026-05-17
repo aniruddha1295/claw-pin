@@ -4,7 +4,7 @@
   "description": "> **\"Trustless file storage where AI agents negotiate, verify, and settle payments\"—The missing infrastructure layer for the cybernetic economy.**",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
     "start": "node src/cli/index.js",
     "dev": "node src/cli/index.js"
   },
@@ -21,13 +21,16 @@
   },
   "homepage": "https://github.com/aniruddha1295/claw-pin#readme",
   "dependencies": {
+    "alkahest-ts": "^0.7.5",
     "chalk": "^4.1.2",
     "commander": "^14.0.3",
     "dotenv": "^17.4.2",
+    "filecoin-pin": "^0.21.0",
     "fs-extra": "^11.3.5",
     "inquirer": "^13.4.3",
     "openclaw-sdk": "^2026.3.19",
-    "ora": "^5.4.1"
+    "ora": "^5.4.1",
+    "viem": "^2.49.3"
   },
   "bin": {
     "claw-pin": "src/cli/index.js"
