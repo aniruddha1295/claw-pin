@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>claw-pin — Agentic File Storage CLI</title>
+  <title>ZeroLayer — Agentic File Storage CLI</title>
   <meta name="description" content="Trustless file storage where AI agents negotiate, verify, and settle payments. Built on Filecoin, OpenClaw, and Alkahest escrow." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -15,9 +15,9 @@
       --bg2: #111118;
       --bg3: #16161f;
       --border: #2a2a3a;
-      --accent: #7c3aed;
-      --accent2: #06b6d4;
-      --accent3: #10b981;
+      --accent: #10b981;
+      --accent2: #0ea5e9;
+      --accent3: #f59e0b;
       --text: #e2e8f0;
       --muted: #94a3b8;
       --code-bg: #0d0d14;
@@ -64,17 +64,17 @@
     .hero::before {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(124,58,237,.18) 0%, transparent 70%),
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(16,185,129,.18) 0%, transparent 70%),
                   radial-gradient(ellipse 50% 40% at 80% 80%, rgba(6,182,212,.1) 0%, transparent 60%);
       pointer-events: none;
     }
     .badge {
       display: inline-flex; align-items: center; gap: .5rem;
-      background: rgba(124,58,237,.15); border: 1px solid rgba(124,58,237,.35);
+      background: rgba(16,185,129,.15); border: 1px solid rgba(16,185,129,.35);
       padding: .35rem 1rem; border-radius: 999px; font-size: .8rem;
-      color: #a78bfa; margin-bottom: 1.5rem; animation: fadeUp .6s ease both;
+      color: #34d399; margin-bottom: 1.5rem; animation: fadeUp .6s ease both;
     }
-    .badge span { width: 7px; height: 7px; border-radius: 50%; background: #7c3aed; display: block; animation: pulse 2s infinite; }
+    .badge span { width: 7px; height: 7px; border-radius: 50%; background: #10b981; display: block; animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.3; } }
     @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
 
@@ -83,19 +83,19 @@
       font-weight: 700; line-height: 1.1;
       animation: fadeUp .7s .1s ease both;
     }
-    h1 .accent { background: linear-gradient(135deg, #7c3aed, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    h1 .accent { background: linear-gradient(135deg, #10b981, #0ea5e9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .hero-sub {
       max-width: 600px; font-size: 1.15rem; color: var(--muted); margin: 1.5rem auto;
       animation: fadeUp .7s .2s ease both;
     }
     .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; animation: fadeUp .7s .3s ease both; margin-top: 1rem; }
     .btn-primary {
-      background: linear-gradient(135deg, #7c3aed, #6d28d9);
+      background: linear-gradient(135deg, #10b981, #059669);
       color: #fff; padding: .75rem 1.75rem; border-radius: 10px;
       font-weight: 600; text-decoration: none; font-size: .95rem;
-      box-shadow: 0 4px 24px rgba(124,58,237,.35); transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 24px rgba(16,185,129,.35); transition: transform .2s, box-shadow .2s;
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(124,58,237,.5); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(16,185,129,.5); }
     .btn-secondary {
       background: var(--bg3); border: 1px solid var(--border); color: var(--text);
       padding: .75rem 1.75rem; border-radius: 10px; font-weight: 500;
@@ -122,7 +122,7 @@
     .t-cmd { color: #e2e8f0; }
     .t-comment { color: #475569; }
     .t-ok { color: var(--accent3); }
-    .t-info { color: #a78bfa; }
+    .t-info { color: #34d399; }
     .t-field { color: var(--accent2); }
 
     /* ── SECTIONS ─────────────────────────────────────── */
@@ -155,7 +155,7 @@
     }
     .arch-card h4 { font-size: .95rem; font-weight: 600; margin-bottom: .35rem; }
     .arch-card p { font-size: .82rem; color: var(--muted); }
-    .arch-tag { display: inline-block; font-size: .7rem; font-family: 'JetBrains Mono', monospace; background: rgba(124,58,237,.15); color: #a78bfa; border-radius: 4px; padding: .1rem .45rem; margin-bottom: .6rem; }
+    .arch-tag { display: inline-block; font-size: .7rem; font-family: 'JetBrains Mono', monospace; background: rgba(16,185,129,.15); color: #34d399; border-radius: 4px; padding: .1rem .45rem; margin-bottom: .6rem; }
 
     /* ── COMMANDS ─────────────────────────────────────── */
     .commands { display: flex; flex-direction: column; gap: 1rem; margin-top: 2.5rem; }
@@ -212,14 +212,14 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">claw-pin</div>
+  <div class="nav-logo">ZeroLayer</div>
   <div class="nav-links">
     <a href="#features">Features</a>
     <a href="#commands">Commands</a>
     <a href="#architecture">Architecture</a>
     <a href="#install">Install</a>
   </div>
-  <a class="nav-cta" href="https://github.com/aniruddha1295/claw-pin" target="_blank">GitHub →</a>
+  <a class="nav-cta" href="https://github.com/aniruddha1295/ZeroLayer" target="_blank">GitHub →</a>
 </nav>
 
 <!-- HERO -->
@@ -232,29 +232,29 @@
   </p>
   <div class="hero-actions">
     <a class="btn-primary" href="#install">Install CLI</a>
-    <a class="btn-secondary" href="https://github.com/aniruddha1295/claw-pin" target="_blank">View on GitHub</a>
+    <a class="btn-secondary" href="https://github.com/aniruddha1295/ZeroLayer" target="_blank">View on GitHub</a>
   </div>
 
   <div class="terminal-wrap">
     <div class="terminal">
       <div class="terminal-bar">
         <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
-        <span class="terminal-title">claw-pin demo</span>
+        <span class="terminal-title">ZeroLayer demo</span>
       </div>
       <div class="terminal-body">
         <div><span class="t-comment"># Initialize your Filecoin wallet</span></div>
-        <div><span class="t-prompt">$ </span><span class="t-cmd">claw-pin init</span></div>
+        <div><span class="t-prompt">$ </span><span class="t-cmd">ZeroLayer init</span></div>
         <div><span class="t-ok">✅ Wallet created: f1xkr3mq7...</span></div>
         <br/>
         <div><span class="t-comment"># Pin a file to Filecoin</span></div>
-        <div><span class="t-prompt">$ </span><span class="t-cmd">claw-pin upload report.pdf</span></div>
+        <div><span class="t-prompt">$ </span><span class="t-cmd">ZeroLayer upload report.pdf</span></div>
         <div><span class="t-info">  CID:      bafybeig4e5b90d6ff64f4a8...</span></div>
         <div><span class="t-info">  Status:   pinned</span></div>
         <div><span class="t-info">  Cost:     0.00000001 FIL</span></div>
         <div><span class="t-ok">✅ Pin complete.</span></div>
         <br/>
         <div><span class="t-comment"># Upload with trustless escrow payment</span></div>
-        <div><span class="t-prompt">$ </span><span class="t-cmd">claw-pin upload --trustless report.pdf</span></div>
+        <div><span class="t-prompt">$ </span><span class="t-cmd">ZeroLayer upload --trustless report.pdf</span></div>
         <div><span class="t-info">  Contract: 0x7a23f8e1...</span></div>
         <div><span class="t-ok">✅ Escrow released after pin verified.</span></div>
       </div>
@@ -264,33 +264,7 @@
 
 <hr class="divider" />
 
-<!-- PRIZES -->
-<section id="features">
-  <div class="section-label">Prize Targets</div>
-  <h2>Built to win <span class="dim">across all categories</span></h2>
-  <div class="prizes">
-    <div class="prize-card">
-      <div class="prize-icon">🥇</div>
-      <h3>IPFS Grand Prize</h3>
-      <div class="prize-amount">$1,000</div>
-      <p>Core CLI + Filecoin Pin SDK + OpenClaw agent orchestration.</p>
-    </div>
-    <div class="prize-card">
-      <div class="prize-icon">🥈</div>
-      <h3>Arkhai Bounty</h3>
-      <div class="prize-amount">$200</div>
-      <p>Alkahest escrow integration — pay only after pin is verified on-chain.</p>
-    </div>
-    <div class="prize-card">
-      <div class="prize-icon">🥉</div>
-      <h3>Aomi Best App</h3>
-      <div class="prize-amount">$300</div>
-      <p>OpenClaw skill registration — agentic, not just a CLI tool.</p>
-    </div>
-  </div>
-</section>
 
-<hr class="divider" />
 
 <!-- ESCROW FLOW -->
 <section>
@@ -355,23 +329,23 @@
   <h2>Everything you <span class="dim">need</span></h2>
   <div class="commands">
     <div class="cmd-row">
-      <div class="cmd-code">claw-pin init</div>
+      <div class="cmd-code">ZeroLayer init</div>
       <div class="cmd-desc">Generate a new Filecoin-compatible mainnet wallet and save credentials to <code>.env.wallet</code>.</div>
     </div>
     <div class="cmd-row">
-      <div class="cmd-code">claw-pin upload &lt;file&gt;</div>
+      <div class="cmd-code">ZeroLayer upload &lt;file&gt;</div>
       <div class="cmd-desc">Pin a local file to the Filecoin network. Returns CID, status, size, and estimated cost.</div>
     </div>
     <div class="cmd-row">
-      <div class="cmd-code">claw-pin upload --trustless &lt;file&gt;</div>
+      <div class="cmd-code">ZeroLayer upload --trustless &lt;file&gt;</div>
       <div class="cmd-desc">Upload with Alkahest escrow — funds locked until pin is verified on-chain, then auto-released.</div>
     </div>
     <div class="cmd-row">
-      <div class="cmd-code">claw-pin status &lt;CID&gt;</div>
+      <div class="cmd-code">ZeroLayer status &lt;CID&gt;</div>
       <div class="cmd-desc">Query pin status for a CID. Returns pinned status, provider count, and retrievability.</div>
     </div>
     <div class="cmd-row">
-      <div class="cmd-code">claw-pin retrieve &lt;CID&gt; &lt;path&gt;</div>
+      <div class="cmd-code">ZeroLayer retrieve &lt;CID&gt; &lt;path&gt;</div>
       <div class="cmd-desc">Download a pinned file by CID to a local output path.</div>
     </div>
   </div>
@@ -385,20 +359,20 @@
   <h2>Install in <span class="dim">seconds</span></h2>
   <div class="install-box">
     <span class="copy-label">Run without installing (npx):</span>
-    <div><span class="t-prompt" style="color:#06b6d4">$ </span><span style="color:#e2e8f0">npx claw-pin --help</span></div>
+    <div><span class="t-prompt" style="color:#0ea5e9">$ </span><span style="color:#e2e8f0">npx ZeroLayer --help</span></div>
   </div>
   <div class="install-box" style="margin-top:1rem">
     <span class="copy-label">Install globally:</span>
-    <div><span class="t-prompt" style="color:#06b6d4">$ </span><span style="color:#e2e8f0">npm install -g claw-pin</span></div>
+    <div><span class="t-prompt" style="color:#0ea5e9">$ </span><span style="color:#e2e8f0">npm install -g ZeroLayer</span></div>
   </div>
   <div class="install-box" style="margin-top:1rem">
     <span class="copy-label">Clone and run locally:</span>
-    <div><span class="t-prompt" style="color:#06b6d4">$ </span><span style="color:#e2e8f0">git clone https://github.com/aniruddha1295/claw-pin.git</span></div>
-    <div><span class="t-prompt" style="color:#06b6d4">$ </span><span style="color:#e2e8f0">cd claw-pin && npm install && npm start</span></div>
+    <div><span class="t-prompt" style="color:#0ea5e9">$ </span><span style="color:#e2e8f0">git clone https://github.com/aniruddha1295/ZeroLayer.git</span></div>
+    <div><span class="t-prompt" style="color:#0ea5e9">$ </span><span style="color:#e2e8f0">cd ZeroLayer && npm install && npm start</span></div>
   </div>
   <div style="margin-top:2rem; display:flex; gap:1rem; flex-wrap:wrap;">
-    <a class="btn-primary" href="https://github.com/aniruddha1295/claw-pin" target="_blank">View on GitHub</a>
-    <a class="btn-secondary" href="https://www.npmjs.com/package/claw-pin" target="_blank">NPM Package</a>
+    <a class="btn-primary" href="https://github.com/aniruddha1295/ZeroLayer" target="_blank">View on GitHub</a>
+    <a class="btn-secondary" href="https://www.npmjs.com/package/ZeroLayer" target="_blank">NPM Package</a>
   </div>
 </section>
 
@@ -406,8 +380,8 @@
 <footer>
   <p>Built for the <strong>IPFS × OpenClaw Hackathon 2026</strong> · Cybernetic Economy Infrastructure</p>
   <p style="margin-top:.5rem">
-    <a href="https://github.com/aniruddha1295/claw-pin">GitHub</a> ·
-    <a href="https://www.npmjs.com/package/claw-pin">NPM</a>
+    <a href="https://github.com/aniruddha1295/ZeroLayer">GitHub</a> ·
+    <a href="https://www.npmjs.com/package/ZeroLayer">NPM</a>
   </p>
 </footer>
 
