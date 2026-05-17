@@ -1,11 +1,11 @@
 'use strict';
 
 const { filePinSkill, filePinStatusSkill, filePinRetrieveSkill } = require('./filePin');
-const { escrowSkill } = require('./escrow');
+const { trustlessVerifySkill } = require('./trustless');
 
 module.exports = {
   filePinSkill,
   filePinStatusSkill,
   filePinRetrieveSkill,
-  escrowSkill,
+  trustlessVerifySkill,
 };

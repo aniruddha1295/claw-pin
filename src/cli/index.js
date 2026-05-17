@@ -9,11 +9,14 @@
 'use strict';
 
 require('dotenv').config();
+// Also load .env.wallet if it exists (Dev 2 wallet credentials)
+require('dotenv').config({ path: '.env.wallet' });
 
 const { Command } = require('commander');
 const { uploadCommand } = require('./cmd/upload');
 const { statusCommand } = require('./cmd/status');
 const { retrieveCommand } = require('./cmd/retrieve');
+const { initCommand } = require('./cmd/init');
 const logger = require('./logger');
 const { initAgent } = require('../integration/agent');
 
@@ -24,11 +27,20 @@ program
   .description('🏆 Agentic File Storage CLI — Trustless file pinning with Filecoin + OpenClaw')
   .version('1.0.0', '-v, --version', 'Output the current version');
 
+// ─── init ────────────────────────────────────────────────────────────────────
+program
+  .command('init')
+  .description('Generate a new Filecoin-compatible wallet and save credentials')
+  .option('--force', 'Overwrite existing wallet')
+  .action(async (options) => {
+    await initCommand(options);
+  });
+
 // ─── upload ──────────────────────────────────────────────────────────────────
 program
   .command('upload <file>')
   .description('Pin a local file to Filecoin decentralised storage')
-  .option('--escrow', 'Create an Alkahest escrow contract for trustless payment')
+  .option('--trustless', 'Verify file pin autonomously and release a trustless conditional payment')
   .action(async (file, options) => {
     await uploadCommand(file, options);
   });

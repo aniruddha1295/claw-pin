@@ -119,22 +119,25 @@ describe('filePinRetrieveSkill (filePin.retrieve)', () => {
   });
 });
 
-// ─── escrow skill ─────────────────────────────────────────────────────────────
+// ─── trustless skill ─────────────────────────────────────────────────────────────
 
-const { escrowSkill } = require('../../src/skills/escrow');
+const { trustlessVerifySkill } = require('../../src/skills/trustless');
 
-describe('escrowSkill (escrow.create)', () => {
+jest.mock('../../src/policy/trustless', () => ({
+  verifyAndRelease: jest.fn().mockResolvedValue({ status: 'Verification successful. Payment settled.', released: true, txHash: '0x123' })
+}));
+
+describe('trustlessVerifySkill (trustless.verifyAndRelease)', () => {
   test('has correct name and params', () => {
-    expect(escrowSkill.name).toBe('escrow.create');
-    expect(escrowSkill.params).toContain('cid');
-    expect(escrowSkill.params).toContain('amount');
+    expect(trustlessVerifySkill.name).toBe('trustless.verifyAndRelease');
+    expect(trustlessVerifySkill.params).toContain('cid');
   });
 
-  test('handler throws not-implemented until Dev 2 fills logic', async () => {
+  test('handler verifies and releases payment', async () => {
     const ctx = { log: jest.fn() };
-    await expect(escrowSkill.handler(ctx, 'bafybeigTestCID123', '0.001')).rejects.toThrow(
-      'escrow.create not implemented'
-    );
+    const result = await trustlessVerifySkill.handler(ctx, 'bafybeigTestCID123');
+    expect(result.status).toBe('Verification successful. Payment settled.');
+    expect(result.released).toBe(true);
   });
 });
 
@@ -143,11 +146,11 @@ describe('escrowSkill (escrow.create)', () => {
 const registry = require('../../src/skills/index');
 
 describe('skills registry', () => {
-  test('exports all four skills as named exports', () => {
+  test('exports all skills as named exports', () => {
     expect(registry).toHaveProperty('filePinSkill');
     expect(registry).toHaveProperty('filePinStatusSkill');
     expect(registry).toHaveProperty('filePinRetrieveSkill');
-    expect(registry).toHaveProperty('escrowSkill');
+    expect(registry).toHaveProperty('trustlessVerifySkill');
   });
 
   test('every exported skill has name, params, description, and handler', () => {

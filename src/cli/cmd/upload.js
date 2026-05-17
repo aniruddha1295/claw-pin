@@ -2,7 +2,7 @@
  * upload.js — `claw-pin upload <file>` command
  *
  * Pins a local file to Filecoin via the integration wrapper.
- * Supports an optional --escrow flag (scaffolded; Dev 2 wires the logic).
+ * Supports --trustless flag for trustless token flow.
  */
 
 const ora = require('ora');
@@ -11,18 +11,15 @@ const logger = require('../logger');
 const { initAgent, getAgent } = require('../../integration/agent');
 
 /**
- * Handler for: claw-pin upload <file> [--escrow]
+ * Handler for: claw-pin upload <file> [--trustless]
  *
  * @param {string} file — path provided by the user
- * @param {{ escrow: boolean }} options
+ * @param {{ trustless: boolean }} options
  */
 async function uploadCommand(file, options = {}) {
   const resolvedPath = path.resolve(file);
 
   logger.info(`Preparing to upload: ${resolvedPath}`);
-  if (options.escrow) {
-    logger.warn('Escrow mode enabled — Dev 2 escrow logic will be invoked after pinning.');
-  }
 
   const spinner = ora('Pinning file to Filecoin…').start();
 
@@ -40,6 +37,36 @@ async function uploadCommand(file, options = {}) {
     logger.field('Providers', String(result.providers));
     logger.divider();
     logger.success(`Pin complete. CID: ${result.cid}`);
+
+    // ─── Trustless Flow Integration ──────────────────────────
+    if (options.trustless) {
+      const walletAddress = process.env.WALLET_ADDRESS;
+      if (!walletAddress) {
+        logger.warn('No WALLET_ADDRESS found. Run `claw-pin init` first to create a wallet.');
+        logger.warn('Skipping trustless payment setup.');
+      } else {
+        logger.info('Trustless Payment Flow activated.');
+        const trustlessSpinner = ora('Verifying pin to release payment conditionally…').start();
+        try {
+          // Instead of calling escrow.create, we call the trustless verification logic directly
+          // We can route this through an agent skill named 'trustless.verifyAndRelease'
+          const payoutResult = await agent.invoke('trustless.verifyAndRelease', result.cid);
+          trustlessSpinner.succeed('Verification passed & Payment Released!');
+          logger.divider();
+          logger.field('Tx Hash', payoutResult.txHash);
+          logger.field('Status', payoutResult.status);
+          if (payoutResult.note) {
+            logger.warn(payoutResult.note);
+          }
+          logger.divider();
+          logger.success('Trustless token transaction verified autonomously.');
+        } catch (err) {
+          trustlessSpinner.fail('Trustless flow failed to verify or release.');
+          logger.error(`Error: ${err.message}`, err);
+          logger.warn('File was pinned successfully, but payment step failed.');
+        }
+      }
+    }
 
     return result; // allows programmatic/test access
   } catch (err) {
