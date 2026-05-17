@@ -9,3 +9,9 @@ dist/
 test.txt
 output.txt
 output_verify.txt
+ZeroLayer.txt
+demo.txt
+downloaded-demo.txt
+result.txt
+roundtrip.txt
+test-upload.mjs
